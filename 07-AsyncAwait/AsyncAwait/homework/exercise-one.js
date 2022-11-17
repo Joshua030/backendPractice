@@ -44,13 +44,16 @@ function problemA () {
    */
 
   // callback version
-  readFile('poem-one/stanza-01.txt', function (err, stanza) {
-    console.log('-- A. callback version --');
-    blue(stanza);
-  });
+  // readFile('poem-one/stanza-01.txt', function (err, stanza) {
+  //   console.log('-- A. callback version --');
+  //   blue(stanza);
+  // });
 
   // AsyncAwait version
-
+readFile('poem-one/stanza-01.txt',async(err,stanza) => {
+  console.log('-- A. callback version --')
+  await blue(stanza);
+})
 
 }
 
@@ -63,17 +66,24 @@ function problemB () {
    */
 
   // callback version
-  readFile('poem-one/stanza-02.txt', function (err, stanza2) {
-    console.log('-- B. callback version (stanza two) --');
-    blue(stanza2);
-  });
-  readFile('poem-one/stanza-03.txt', function (err, stanza3) {
-    console.log('-- B. callback version (stanza three) --');
-    blue(stanza3);
-  });
+  // readFile('poem-one/stanza-02.txt', function (err, stanza2) {
+  //   console.log('-- B. callback version (stanza two) --');
+  //   blue(stanza2);
+  // });
+  // readFile('poem-one/stanza-03.txt', function (err, stanza3) {
+  //   console.log('-- B. callback version (stanza three) --');
+  //   blue(stanza3);
+  // });
 
   // AsyncAwait version
-
+  readFile('poem-one/stanza-02.txt', async (err, stanza2) => {
+    console.log('-- B. callback version (stanza two) --');
+    await blue(stanza2);
+  });
+  readFile('poem-one/stanza-03.txt', async (err, stanza3) => {
+    console.log('-- B. callback version (stanza three) --');
+    await blue(stanza3);
+  });
 }
 
 function problemC () {
@@ -88,18 +98,26 @@ function problemC () {
    */
 
   // callback version
-  readFile('poem-one/stanza-02.txt', function (err, stanza2) {
+  // readFile('poem-one/stanza-02.txt', function (err, stanza2) {
+  //   console.log('-- C. callback version (stanza two) --');
+  //   blue(stanza2);
+  //   readFile('poem-one/stanza-03.txt', function (err, stanza3) {
+  //     console.log('-- C. callback version (stanza three) --');
+  //     blue(stanza3);
+  //     console.log('-- C. callback version done --');
+  //   });
+  // });
+
+  // AsyncAwait version
+  readFile('poem-one/stanza-02.txt', async (err, stanza2) => {
     console.log('-- C. callback version (stanza two) --');
-    blue(stanza2);
-    readFile('poem-one/stanza-03.txt', function (err, stanza3) {
+    await blue(stanza2);
+    readFile('poem-one/stanza-03.txt', async (err, stanza3) =>{
       console.log('-- C. callback version (stanza three) --');
-      blue(stanza3);
+     await blue(stanza3);
       console.log('-- C. callback version done --');
     });
   });
-
-  // AsyncAwait version
-
 }
 
 function problemD () {
@@ -110,14 +128,23 @@ function problemD () {
    */
 
   // callback version
-  readFile('poem-one/wrong-file-name.txt', function (err, stanza4) {
-    console.log('-- D. callback version (stanza four) --');
-    if (err) magenta(err);
-    else blue(stanza4);
-  });
+  // readFile('poem-one/wrong-file-name.txt', function (err, stanza4) {
+  //   console.log('-- D. callback version (stanza four) --');
+  //   if (err) magenta(err);
+  //   else blue(stanza4);
+  // });
 
   // AsyncAwait version
-
+  readFile('poem-one/wrong-file-name.txt', async (err, stanza4) => {
+   
+    try {
+      console.log('-- D. callback version (stanza four) --');
+      await blue(stanza4);
+      
+    } catch (err) {
+      await magenta(err)
+    }
+  });
 }
 
 function problemE () {
@@ -130,19 +157,35 @@ function problemE () {
    */
 
   // callback version
-  readFile('poem-one/stanza-03.txt', function (err, stanza3) {
-    console.log('-- E. callback version (stanza three) --');
-    if (err) return magenta(err);
-    blue(stanza3);
-    readFile('poem-one/wrong-file-name.txt', function (err2, stanza4) {
-      console.log('-- E. callback version (stanza four) --');
-      if (err2) return magenta(err2);
-      blue(stanza4);
-    });
-  });
+  // readFile('poem-one/stanza-03.txt', function (err, stanza3) {
+  //   console.log('-- E. callback version (stanza three) --');
+  //   if (err) return magenta(err);
+  //   blue(stanza3);
+  //   readFile('poem-one/wrong-file-name.txt', function (err2, stanza4) {
+  //     console.log('-- E. callback version (stanza four) --');
+  //     if (err2) return magenta(err2);
+  //     blue(stanza4);
+  //   });
+  // });
 
   // AsyncAwait version
-
+  readFile('poem-one/stanza-03.txt', async (err, stanza3) => {
+    try {
+      console.log('-- E. callback version (stanza three) --');
+     await blue(stanza3);
+      
+    } catch (err) {
+       magenta(err);
+    }
+  })
+    readFile('poem-one/wrong-file-name.txt', async (err2, stanza4) => {
+      try {
+       await  blue(stanza4);
+        
+      } catch (err2) {
+        await magenta(err2)
+      }
+    });
 }
 
 function problemF () {
